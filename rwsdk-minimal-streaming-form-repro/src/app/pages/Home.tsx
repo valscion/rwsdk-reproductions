@@ -1,6 +1,5 @@
-import { Welcome } from "./Welcome.js";
+import { serverAction } from "./serverAction";
 
 export const Home = () => {
-  // _Feel free to delete this element and its import_
-  return <Welcome />;
+  return <form action={serverAction}><button name="submit-button">Submit</button></form>
 };
