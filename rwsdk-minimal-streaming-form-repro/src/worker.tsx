@@ -14,14 +14,15 @@ export default defineApp([
     ctx;
   },
   render(Document, [
-    route("/", async () => {
-      return new Response(await renderToStream(<Home />, { Document }), {
-        status: 200,
-        headers: {
-          "content-type": "text/html",
-          "cache-control": "no-transform",
-        },
-      });
-    }),
+    route("/", Home),
   ]),
+  route("/stream", async () => {
+    return new Response(await renderToStream(<Home />, { Document }), {
+      status: 200,
+      headers: {
+        "content-type": "text/html",
+        "cache-control": "no-transform",
+      },
+    });
+  }),
 ]);
