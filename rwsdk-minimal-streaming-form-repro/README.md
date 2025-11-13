@@ -1,24 +1,41 @@
-# RedwoodSDK Minimal Starter
+# Streamed page with a server action
 
-This is the starter project for RedwoodSDK. It's a template designed to get you up and running as quickly as possible.
-
-Create your new project:
-
-```shell
-npx create-rwsdk my-project-name
-cd my-project-name
-npm install
 ```
-
-## Running the dev server
-
-```shell
+npm install
 npm run dev
 ```
 
-Point your browser to the URL displayed in the terminal (e.g. `http://localhost:5173/`). You should see a "Hello World" message in your browser.
+## Successful steps:
 
-## Further Reading
+1. Navigate to http://localhost:5173/
+2. Click the button
+3. See the button name is logged to server console
+4. The button is still visible on the page. All good.
 
-- [RedwoodSDK Documentation](https://docs.rwsdk.com/)
-- [Cloudflare Workers Documentation](https://developers.cloudflare.com/workers)
+## Failure reproduction:
+
+1. Navigate to http://localhost:5173/stream
+2. Click the button
+3. See the button name is logged to server console
+4. The page turned white as the entire app crashed. There's an error in browser logs:
+
+```
+Uncaught error:  Error: Connection closed.
+    close react-server-dom-webpack-client.browser.development.js:4579
+    progress react-server-dom-webpack-client.browser.development.js:4743
+    promise callback*progress react-server-dom-webpack-client.browser.development.js:4745
+    promise callback*startReadingFromStream react-server-dom-webpack-client.browser.development.js:4752
+    createFromFetch react-server-dom-webpack-client.browser.development.js:5002
+    promise callback*node_modules/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js/exports.createFromFetch react-server-dom-webpack-client.browser.development.js:4984
+    fetchCallServer client.js:44
+    callServer client.js:92
+    action react-server-dom-webpack-client.browser.development.js:802
+    serverAction rwsdk_worker.js:140
+    React 16
+    initClient client.js:123
+    <anonymous> client.tsx:3
+ 
+
+Component stack:
+Content@http://localhost:5173/node_modules/.vite/deps/chunk-GQZH24O2.js?v=55322f16:265:63 <anonymous code>:1:147461
+```
